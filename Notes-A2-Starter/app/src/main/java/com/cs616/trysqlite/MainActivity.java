@@ -3,6 +3,7 @@ package com.cs616.trysqlite;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         titleEditText = (EditText) findViewById(R.id.titleEditText_Main);
         bodyEditText = (EditText) findViewById(R.id.bodyEditText_Main);
+        Intent i = getIntent();
+        String title = i.getStringExtra("title");
+        String body = i.getStringExtra("body");
+        long category = i.getLongExtra("category", 1);
+
+
+        //Toast.makeText(this, Long.toString(category), Toast.LENGTH_SHORT).show();
+
+        int k = Integer.parseInt(Long.toString(category));
+        titleEditText.setText(title);
+        bodyEditText.setText(body);
     }
 
     public void refreshSpinner() {
@@ -84,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Note saved.", Toast.LENGTH_SHORT);
             toast.show();
 
+            finish();
             return true; // TODO
         }
         /*else if(id == R.id.action_debug) {

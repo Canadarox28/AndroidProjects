@@ -1,5 +1,6 @@
 package com.cs616.trysqlite;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,9 +34,15 @@ public class NoteListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(NoteListActivity.this, notes.get(position).toString(), Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Note current = notes.get(position);
+                i.putExtra("title", current.getTitle());
+                i.putExtra("body", current.getBody());
+                i.putExtra("category", current.getCategoryId());
+                startActivity(i);
             }
         });
-
     }
 
     @Override
